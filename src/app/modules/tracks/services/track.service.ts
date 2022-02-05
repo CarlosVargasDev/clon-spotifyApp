@@ -1,48 +1,45 @@
 import { Injectable } from '@angular/core';
-import * as dataRaw from '../../../data/tracks.json';
-import { Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { TrackModel } from '@mCore/models/tracks.interface';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackService {
+  private readonly URL = environment.api;
 
   dataTracksTrending$:Observable<TrackModel[]>=of([]);
   dataTracksNewTrending$  :Observable<TrackModel[]>=of([]);
 
-  constructor() {
-    const {data}:any = (dataRaw as any).default;
-    
-    // Crear observer V1
-    this.dataTracksTrending$ = of(data);
-
-    // Crear  observer V2
-    this.dataTracksNewTrending$ = new Observable((observer)=>{
-
-      const newTrackExample: TrackModel ={
-        _id: 1,
-        name: "Perros",
-        album: "Album V1",
-        cover: "https://grupoenconcreto.com/wp-content/uploads/Cartel-de-Santa.jpg",
-        artist: {
-            name: "Cartel de Santa",
-            nickname: "Babo",
-            nationality: "MX"
-        },
-        duration: {
-            start: 0,
-            end: 333
-        },
-        url:"http://localhost:3000/track.mp3"
-      }
-      setTimeout(()=>observer.next([newTrackExample]), 3000);
-    })
+  constructor(private httpClient:HttpClient) {
   }
 
-  // getAllTracks$(): Observable<any>{
-  getAllTracks$(){
-    
+  errorHandler(error:any, msg:string){
+    console.log(msg);
+    console.log(error);
+    return of([])
+  }
+
+  
+  getAllTracks$():Observable<TrackModel[]>{
+    const urlTracks = `${this.URL}/tracks`;
+    return this.httpClient.get(urlTracks)
+              .pipe(
+                map(({data}:any) =>data),
+                catchError(error => this.errorHandler(error,`No se pudo obtener la data de ${urlTracks}`))
+              );
+    }
+
+
+  getAllRandom(): Observable<TrackModel[]>{
+    const urlTracks = `${this.URL}/tracks`;
+    return this.httpClient.get(urlTracks)
+              .pipe(
+                map(({data}:any) => data.reverse()),
+                catchError(error => this.errorHandler(error,`No se pudo obtener la data de ${urlTracks}`))
+              )
   }
 
 }

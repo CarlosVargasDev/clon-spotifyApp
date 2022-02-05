@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./tracks-page.component.css']
 })
 export class TracksPageComponent implements OnInit, OnDestroy {
-  
   // List observer
   listObserver$:Subscription[] = [];
 
@@ -22,25 +21,28 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   constructor(private trackService:TrackService) { }
 
   ngOnInit(): void {
-    const obsTrending$ = this.trackService.dataTracksTrending$
-        .subscribe(tracks =>{
-          console.log("Canciones trending");
-          this.tracksTrending = [...tracks];
-          this.tracksRamdom   = [...tracks];
-        });
-
-    const newTrendings$ = this.trackService.dataTracksNewTrending$
-          .subscribe(tracks =>{
-            console.log("CAncion ramdom entrando");
-            this.tracksTrending.push( ...tracks);
-          })
-
-
-    
-    // Agregamos a nuestra lista de observer
-    this.listObserver$.push(obsTrending$);  
-    this.listObserver$.push(newTrendings$);
+    this.loadDataTrending();
+    this.loadDataRandom();
   }
+
+  loadDataTrending(){
+    const obsTracksTrending$ = this.trackService.getAllTracks$()
+      .subscribe(( tracks:TrackModel[] )=>{
+        this.tracksTrending = [...tracks];
+      });
+    this.listObserver$.push(obsTracksTrending$);
+
+  }
+
+  loadDataRandom(){
+    const obsTracksRandom$ = this.trackService.getAllRandom()
+      .subscribe( (tracks:TrackModel[])=> {
+        this.tracksRamdom = [...tracks];
+      })
+
+    this.listObserver$.push(obsTracksRandom$);
+  }
+
 
   ngOnDestroy(): void {
       this.listObserver$.forEach( i => i.unsubscribe());
