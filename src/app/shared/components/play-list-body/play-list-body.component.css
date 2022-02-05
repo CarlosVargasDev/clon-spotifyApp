@@ -54,3 +54,7 @@
     font-size: 80%;
     opacity: .7;
 }
+
+.play-list-table-header li{
+    cursor: pointer;
+}

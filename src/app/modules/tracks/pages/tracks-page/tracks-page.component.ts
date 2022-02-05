@@ -1,21 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrackModel } from '@mCore/models/tracks.interface';
-import * as dataRaw from '../../../../data/tracks.json';
+import { TrackService } from '@mModules/tracks/services/track.service';
+import { Subscription } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-tracks-page',
   templateUrl: './tracks-page.component.html',
   styleUrls: ['./tracks-page.component.css']
 })
-export class TracksPageComponent implements OnInit {
+export class TracksPageComponent implements OnInit, OnDestroy {
+  
+  // List observer
+  listObserver$:Subscription[] = [];
 
-  data_model:Array<TrackModel>=[];
+  // data_model:Array<TrackModel>=[];
+  tracksTrending:TrackModel[]=[];
+  tracksRamdom:TrackModel[]=[];
 
-  constructor() { }
+  constructor(private trackService:TrackService) { }
 
   ngOnInit(): void {
-    const data:any = (dataRaw as any).default;
-    this.data_model = data.data
+    const obsTrending$ = this.trackService.dataTracksTrending$
+        .subscribe(tracks =>{
+          console.log("Canciones trending");
+          this.tracksTrending = [...tracks];
+          this.tracksRamdom   = [...tracks];
+        });
+
+    const newTrendings$ = this.trackService.dataTracksNewTrending$
+          .subscribe(tracks =>{
+            console.log("CAncion ramdom entrando");
+            this.tracksTrending.push( ...tracks);
+          })
+
+
+    
+    // Agregamos a nuestra lista de observer
+    this.listObserver$.push(obsTrending$);  
+    this.listObserver$.push(newTrendings$);
+  }
+
+  ngOnDestroy(): void {
+      this.listObserver$.forEach( i => i.unsubscribe());
   }
 
 }
