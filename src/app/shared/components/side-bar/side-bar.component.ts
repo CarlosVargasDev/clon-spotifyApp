@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 interface menuItems{
   defaultOptions: Array<any>,
@@ -18,10 +20,13 @@ export class SideBarComponent implements OnInit {
     accessLink: []
   }
 
-  customOptions: Array<any> = []
+  userData: any = {
+    _id: '2345324j5345kr1ghjg3hj',
+    nombre:'Carlos Vargas'
+  };
 
 
-  constructor() { }
+  constructor(private cookieService:CookieService, private router: Router) { }
 
   ngOnInit(): void {
     this.mainMenu.defaultOptions = [
@@ -52,27 +57,13 @@ export class SideBarComponent implements OnInit {
         icon: 'uil-heart-medical'
       }
     ]
-    this.customOptions = [
-      {
-        name: 'Mi lista º1',
-        router: ['/']
-      },
-      {
-        name: 'Mi lista º2',
-        router: ['/']
-      },
-      {
-        name: 'Mi lista º3',
-        router: ['/']
-      },
-      {
-        name: 'Mi lista º4',
-        router: ['/']
-      }
-    ]
-
+  
   }
 
-  
-
+  logout(){
+    console.log("Eliminando token");
+    this.cookieService.delete('token_service','/');
+    // this.cookieService.deleteAll();
+    this.router.navigate(['/auth/login']);
+  }
 }

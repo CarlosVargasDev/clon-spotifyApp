@@ -48,3 +48,27 @@
 .side-bar__list li {
     cursor: pointer;
 }
+
+.userInfo{
+    cursor: default;
+}
+
+.userInfo .imgUserContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.userInfo .imgUser{
+    width: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.userInfo .nameUser{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.side-bar__list li:hover{
+    background-color: var(--color-5);
+}

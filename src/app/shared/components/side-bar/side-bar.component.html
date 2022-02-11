@@ -1,5 +1,31 @@
 <div class="side-bar">
-    <!-- <div><i class="uil uil-ellipsis-h"></i></div> -->
+
+    <div class="userInfo">
+        <div class="imgUserContent">
+            <img appImgBroken src="" class="imgUser">
+        </div>
+        <div  class="nameUser">{{userData.nombre}}</div>
+    </div>
+
+    <!-- Controles de usuario -->
+    <ul class="side-bar__list list-two">
+        <div class="side-bar__separator line-separator"></div>
+        <li>
+            <div class="list-wrapper-item">
+                <i class="uil uil-user-square"></i>
+                <span class="side-bar__list list-label">Perfil</span>
+            </div>
+        </li>
+        <li (click)="logout()">
+            <div class="list-wrapper-item">
+                <i class="uil uil-signout"></i>
+                <span class="side-bar__list list-label">Cerrar Sesion</span>
+            </div>
+        </li>
+    </ul>
+    
+    <!-- Separador -->
+    <div class="side-bar__separator line-separator"></div>
     
     <!-- Lista: Home, Buscar, Biblioteca -->
     <ul class="side-bar__list list-one">
@@ -26,15 +52,6 @@
             </div>
         </li>
     </ul>
+    
 
-    <div class="side-bar__separator line-separator"></div>
-
-    <!-- Custom options -->
-    <ul class="side-bar__list list-three">
-        <li *ngFor="let item of customOptions">
-            <div class="list-wrapper-item">
-                <span class="side-bar__list list-label">{{item.name}}</span>
-            </div>
-        </li>
-    </ul>
 </div>
