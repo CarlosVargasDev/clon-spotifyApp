@@ -4,8 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { InjectTokenInterceptor } from './core/interceptors/inject-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,12 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule
   ],
   providers: [
-    CookieService
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InjectTokenInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

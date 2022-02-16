@@ -33,7 +33,6 @@ export class RegisterComponent  {
     const password = this.miFormulario.value.password;
     const fecha_nac = this.miFormulario.value.fecha_nac;
 
-    // TODO: Agregar mensaje de alerta
     this.authService.register(email,password, nombre,fecha_nac)
           .subscribe(
             responce => {
@@ -54,8 +53,12 @@ export class RegisterComponent  {
         TODO: Hacer una auntentica validacion de este token en el backend,
         con la validacion actual, se puede falsificar fasilmente el token
       */
-      // Verificar Token
-      const token = this.cookieService.check('token_service');    
+
+      //  Obtener token
+     const token = this.cookieService.check('token_service');    
+
+
+     // Validar token
       if(token){
         this.router.navigate(['spotify/stracks'])
       }

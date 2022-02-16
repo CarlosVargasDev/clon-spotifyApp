@@ -45,5 +45,10 @@ export class AuthService {
   }
 
 
+  validarToken(token:string){
+    // Validar Token
+
+  }
+
 
 }

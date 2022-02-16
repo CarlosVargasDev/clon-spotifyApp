@@ -1,1 +1,4 @@
-<p>history-page works!</p>
+<div class="history-page">
+    <app-search (callbackData)="recivirData($event)"> </app-search>
+    <app-play-list-body [tracks]="resultados_busqueda$ | async"></app-play-list-body>
+</div>

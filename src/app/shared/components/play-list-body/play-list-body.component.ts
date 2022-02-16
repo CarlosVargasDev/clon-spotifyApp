@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TrackModel } from '@mCore/models/tracks.interface';
 
 import * as dataRaw from '../../../data/tracks.json';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-play-list-body',
@@ -13,13 +14,13 @@ export class PlayListBodyComponent implements OnInit {
   ordenacion = "asc";
 
 
-  @Input() tracks: TrackModel[] = []
+  @Input() tracks: TrackModel[] = [];
+  
   constructor() { }
 
   ngOnInit(): void {
-    const {data}:any = (dataRaw as any).default;
-    this.tracks = data;
-
+    // const {data}:any = (dataRaw as any).default;
+    // this.tracks = data;
   }
 
   cambiarOrden(campo:"name"| "album"){

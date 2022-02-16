@@ -8,7 +8,7 @@ export class OrderListPipe implements PipeTransform {
 
 
   transform(tracks:TrackModel[],campo:string | null = null, order:string | null = 'asc'  ): TrackModel[] {
-    if(!campo ){
+    if(!campo || !tracks ){
       return tracks;
     }
     
@@ -22,6 +22,7 @@ export class OrderListPipe implements PipeTransform {
       }
       return 0;
     }
+
     const  arrayTracks = tracks.sort(fnOrdenamientoAsc);
         
     return (order === 'asc')? arrayTracks: arrayTracks.reverse();

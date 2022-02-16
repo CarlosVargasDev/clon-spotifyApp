@@ -18,16 +18,17 @@ export class SessionGuard implements CanActivate, CanLoad {
 
   checkCookieSession():boolean{
     try{
-      /* 
-        TODO: Hacer una auntentica validacion de este token en el backend,
-        con la validacion actual, se puede falsificar fasilmente el token
-      */
-      // Verificar Token
+      //Obtener token
       const token = this.cookieService.check('token_service');
       if(!token){
         this.router.navigate(['auth/login'])
         return false;
       }
+      
+  
+      // TODO: Validar Token desde el backend
+      // ....
+
       return true;
 
     }catch(e){
