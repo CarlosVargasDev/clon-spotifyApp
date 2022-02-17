@@ -10,6 +10,7 @@
             <ng-container *ngTemplateOutlet="playerZone"></ng-container>
         </div>
 
+
         <!--Zona del controles adicionales-->
         <div class="player-audio player-center">
             <ng-container *ngTemplateOutlet="playerAudio"></ng-container>
@@ -20,8 +21,8 @@
 <!-- ZONE TEMPLATES -->
 
 <ng-template #artistZone>
-    <div class="artist-inside">
-
+    <div class="artist-inside"
+          *ngIf="mockCover" >
         <img [src]="mockCover.cover" alt="" class="cover">
         <div class="track-info">
             <h3 class="track-title">{{mockCover.name}}</h3>
@@ -37,27 +38,49 @@
 
 <ng-template #playerZone>
     <div class="player-controls-inside">
+        <!-- Controls Media player -->
         <div class="buttons-media">
+            <!-- Button back -->
             <button class="arrow btn">
                 <i class="uil uil-previous"></i>
             </button>
-            <button  class="play btn">
-                <i class="uil "></i>
 
+            <!-- Buttons Play-Paused -->
+            <button  class="play btn" (click)="multimediaService.togglePlayer()">
+                <!-- <i class="uil uil-play-circle">{{playerStatus}}</i> -->
+                <i [ngClass]="{
+                    'uil-play-circle':playerStatus ==='paused',
+                    'uil-pause-circle':playerStatus !=='paused'
+                    }"
+                    class="uil">
+                </i>
             </button>
+            
+            <!-- Button next -->
             <button class="arrow btn">
                 <i class="uil uil-step-forward"></i>
             </button>
         </div>
-        <div class="media-linetime">
 
-            <div class="time"> 00</div>
-            <span #progressBar class="time-progress">
-                <span class="time-progress-live" >
-                </span>
+        <!-- Progress -->
+        <div class="media-linetime">
+            <!-- CurrentTime -->
+            <div class="time"> {{timeMusic}}</div>
+
+            <!-- Progress Bar -->
+            <span #progressBar 
+                  (click)="setProgress($event)"
+                  class="time-progress">
+                        <span class="time-progress-live"
+                            [style.width]="this.percentageProgressBar+'%' || 0+'%'">
+                            <!-- {{this.myprogressBar}} -->
+                        </span>
             </span>
-            <div class="time"></div>
+
+            <!-- RemainnigTime -->
+            <div class="time">{{remainningMusic}}</div>
         </div>
+        
     </div>
 </ng-template>
 
@@ -74,3 +97,4 @@
         </button>
     </div>
 </ng-template>
+
