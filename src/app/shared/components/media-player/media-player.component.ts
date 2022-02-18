@@ -63,8 +63,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     this.listObservers$.push(observerPlayerProgressBar$);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void {    
     this.listObservers$.forEach( u => u.unsubscribe());    
+    this.multimediaService.audio.load();
   }
 
   setProgress(event:any){

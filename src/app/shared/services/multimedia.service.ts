@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { TrackModel } from '../../core/models/tracks.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 
 
@@ -10,9 +10,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class MultimediaService {
   // callback: EventEmitter<TrackModel> = new EventEmitter<TrackModel>();
-  
-  public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public audio!: HTMLAudioElement; 
+  public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public timeElapsed$: BehaviorSubject<string> = new BehaviorSubject('00:00');
   public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('00:00');
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused');
@@ -28,7 +27,7 @@ export class MultimediaService {
   }
 
   public setAudio(track: TrackModel): void{    
-    const urlAudio = `http://${track.url}`;
+    const urlAudio = `${track.url}`;
     this.audio.src= urlAudio;
     this.audio.play();  
   }
