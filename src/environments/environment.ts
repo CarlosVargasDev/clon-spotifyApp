@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:3001/api/1.0'
+  // api: 'https://portafolio-backend-spotify-api.herokuapp.com/api/v1.0'
+  api: 'http://localhost:3002/api/v1.0'
+  // api: 'http://localhost:3001/api/1.0'
 };
 
 /*
