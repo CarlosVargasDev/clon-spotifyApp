@@ -7,7 +7,7 @@ Aplicación web que es un clon de Spotify, implementada con el framework Angular
 
 La comunicación entre el servidor y la aplicación se hace mediante una API REST que es
 la encargada de gestionar las peticiones. El proyecto está desplegado en Netlify y puedes verlo aqui:
- https://clon-spotify-crl.netlify.app/auth/login
+ https://clon-spotify-crl.netlify.app
 
 
 ## Back-End
