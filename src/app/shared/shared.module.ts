@@ -15,6 +15,7 @@ import { PlayListHeaderComponent } from './components/play-list-header/play-list
 import { SectionGenericComponent } from './components/section-generic/section-generic.component';
 import { RouterModule } from '@angular/router';
 import { OrderListPipe } from './pipes/order-list.pipe';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 
@@ -29,7 +30,8 @@ import { OrderListPipe } from './pipes/order-list.pipe';
     PlayListHeaderComponent,
     SectionGenericComponent,
     OrderListPipe,
-    ImgBrokenDirective
+    ImgBrokenDirective,
+    SpinnerComponent
   ],
   exports:[
     // Componentes
@@ -39,6 +41,7 @@ import { OrderListPipe } from './pipes/order-list.pipe';
     SectionGenericComponent,
     PlayListBodyComponent,
     PlayListHeaderComponent,
+    SpinnerComponent,
 
     // Directivas
     ImgBrokenDirective
