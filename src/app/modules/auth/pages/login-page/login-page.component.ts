@@ -16,6 +16,7 @@ export class LoginPageComponent{
   })
 
   errorSession:boolean = false;
+  loading = false;
 
   constructor(private fb: FormBuilder, private authService:AuthService, private router:Router, private cookieService:CookieService) {
     this.verificaToken();
@@ -24,6 +25,7 @@ export class LoginPageComponent{
   login(){
       const email = this.miFormulario.value.email;
       const passworld = this.miFormulario.value.password;
+      this.loading=true;
       this.authService.login(email,passworld)
           .subscribe(
             responce => {
@@ -34,6 +36,7 @@ export class LoginPageComponent{
             error => {
               console.log("Ocurrio un error con tu email o password");
               this.errorSession= true;
+              this.loading=false;
             }
           )
   }

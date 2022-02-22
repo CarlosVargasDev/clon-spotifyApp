@@ -22,6 +22,7 @@ export class RegisterComponent  {
 
   errorSession:boolean = false;
   list_errores:ErrResponce[]=[];
+  loading = false;
 
   constructor(private fb: FormBuilder, private authService:AuthService, private router:Router, private cookieService:CookieService) {
     this.verificaToken();
@@ -32,7 +33,7 @@ export class RegisterComponent  {
     const email = this.miFormulario.value.email;
     const password = this.miFormulario.value.password;
     const fecha_nac = this.miFormulario.value.fecha_nac;
-
+    this.loading = true;
     this.authService.register(email,password, nombre,fecha_nac)
           .subscribe(
             responce => {
@@ -43,6 +44,7 @@ export class RegisterComponent  {
               this.errorSession = true;
               // Mostramos los errores
               this.list_errores = respError.error.errors;
+              this.loading = false;
               
             }
           )

@@ -46,7 +46,11 @@
             <div class="form-action">
                 <!-- <button [disabled]="formLogin.invalid" class="login social-btn">Iniciar sesión</button> -->
                 <button class="login social-btn"
-                         [disabled]="miFormulario.invalid">Iniciar sesión</button>
+                         [disabled]="miFormulario.invalid">
+                         Iniciar sesión
+                         
+                         <app-spinner *ngIf="loading"></app-spinner>
+                </button>
             </div>
         </form>
     </div>

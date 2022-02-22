@@ -65,6 +65,7 @@
                 <button class="login social-btn"
                         [disabled]="miFormulario.invalid">
                             Registrarse
+                            <app-spinner *ngIf="loading"></app-spinner>
                 </button>
             </div>
         </form>

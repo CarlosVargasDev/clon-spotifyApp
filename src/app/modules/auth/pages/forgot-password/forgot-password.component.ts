@@ -12,6 +12,7 @@ export class ForgotPasswordComponent {
   miFormulario: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
   })
+  loading = false;
 
   constructor(private fb: FormBuilder, private cookieService: CookieService, private router:Router) {
     this.verificaToken();
