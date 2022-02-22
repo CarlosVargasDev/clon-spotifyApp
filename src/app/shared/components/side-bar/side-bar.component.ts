@@ -44,7 +44,7 @@ export class SideBarComponent implements OnInit {
         name: 'Tu biblioteca',
         icon: 'uil uil-chart',
         router: ['./', 'favorites'],
-        query: { hola: 'mundo' }
+        // query: { hola: 'mundo' }
       }
     ]
     this.mainMenu.accessLink = [

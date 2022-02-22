@@ -17,6 +17,7 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   // data_model:Array<TrackModel>=[];
   tracksTrending:TrackModel[]=[];
   tracksRamdom:TrackModel[]=[];
+  loading:Boolean=true;
 
   constructor(private trackService:TrackService) { }
 
@@ -28,6 +29,7 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   loadDataTrending(){
     const obsTracksTrending$ = this.trackService.getAllTracks$()
       .subscribe(( tracks:TrackModel[] )=>{
+        this.loading=false;
         this.tracksTrending = [...tracks];
       });
     this.listObserver$.push(obsTracksTrending$);
@@ -37,6 +39,7 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   loadDataRandom(){
     const obsTracksRandom$ = this.trackService.getAllRandom()
       .subscribe( (tracks:TrackModel[])=> {
+        this.loading=false;
         this.tracksRamdom = [...tracks];
       })
 

@@ -154,6 +154,14 @@ input.ng-invalid.ng-touched {
     color: red;
 }
 
+.container-spinner-page{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 @media screen and (max-width: 900px) {
     .login-auth-page .login-auth-wrapper {
@@ -172,3 +180,4 @@ input.ng-invalid.ng-touched {
         width: 94%;       
     }
 }
+

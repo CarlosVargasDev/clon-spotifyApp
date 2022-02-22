@@ -1,3 +1,9 @@
+<div class="container-spinner-page" *ngIf="loading">
+    <app-spinner [size] = "'extra-large'"></app-spinner>
+</div>
+
+
+
 <div class="tracks-page">
     <!--section top (small)-->
     <app-section-generic [dataTracks]="tracksTrending" [mode]="'small'" [title]="'¡La mejor música del mundo!'">
